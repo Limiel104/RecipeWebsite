@@ -43,10 +43,10 @@ namespace RecipeWebsite.Data
 
             var recipes = new Recipe[]
             {
-                new Recipe{Name="Przepis1",NumberOfServings=1},
-                new Recipe{Name="Przepis2",NumberOfServings=2},
-                new Recipe{Name="Przepis3",NumberOfServings=3},
-                new Recipe{Name="Przepis4",NumberOfServings=2}
+                new Recipe{Name="Przepis1",NumberOfServings=1,LastTimeServed=DateTime.Parse("2020-03-12")},
+                new Recipe{Name="Przepis2",NumberOfServings=2,LastTimeServed=DateTime.Parse("2020-03-16")},
+                new Recipe{Name="Przepis3",NumberOfServings=3,LastTimeServed=DateTime.Parse("2020-03-08")},
+                new Recipe{Name="Przepis4",NumberOfServings=2,LastTimeServed=DateTime.Parse("2020-03-21")}
             };
             foreach (Recipe r in recipes)
             {

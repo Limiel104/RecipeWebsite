@@ -19,6 +19,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.Recipe[0].NumberOfServings)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Recipe[0].LastTimeServed)
+            </th>
             <th></th>
         </tr>
     </thead>
@@ -30,6 +33,9 @@
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.NumberOfServings)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastTimeServed)
             </td>
             <td>
                 <a asp-page="./Edit" asp-route-id="@item.RecipeID">Edit</a> |

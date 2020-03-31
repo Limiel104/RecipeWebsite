@@ -11,5 +11,6 @@ namespace RecipeWebsite.Models
         public int RecipeID { get; set; }
         public string Name { get; set; }
         public int NumberOfServings { get; set; }
+        public DateTime LastTimeServed { get; set; }
     }
 }

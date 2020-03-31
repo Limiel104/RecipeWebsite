@@ -78,7 +78,7 @@ namespace RecipeWebsite.Pages.Recipes
             if(await TryUpdateModelAsync<Recipe>(
                 recipeToUpdate,
                 "recipe",
-                r => r.Name, r => r.NumberOfServings))
+                r => r.Name, r => r.NumberOfServings, r => r.LastTimeServed))
             {
                 await _context.SaveChangesAsync();
                 return RedirectToPage("./Index");

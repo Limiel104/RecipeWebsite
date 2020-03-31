@@ -24,28 +24,34 @@
             @Html.DisplayFor(model => model.Recipe.NumberOfServings)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Recipe.QuantityInRecipes)
+            @Html.DisplayNameFor(model => model.Recipe.LastTimeServed)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Recipe.LastTimeServed)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayName("Składniki")
         </dt>
         <dd class="col-sm-10">
             <table class="table">
                 <tr>
-                    <th>Nazwa Składnika</th>
+                    <th>Nazwa</th>
                     <th>Typ</th>
                     <th>Ilość</th>
                 </tr>
                 @foreach (var item in Model.Recipe.QuantityInRecipes)
                 {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ingredient.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Ingredient.TypeOfFood)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Quantity)
-                </td>
-            </tr>
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ingredient.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Ingredient.TypeOfFood)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Quantity)
+                        </td>
+                    </tr>
                 }
             </table>
         </dd>
