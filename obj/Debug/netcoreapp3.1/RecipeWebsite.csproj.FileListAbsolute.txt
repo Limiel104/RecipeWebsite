@@ -170,3 +170,8 @@ D:\Documents\Projekty C#\RecipeWebsite\obj\Debug\netcoreapp3.1\Razor\Pages\Recip
 D:\Documents\Projekty C#\RecipeWebsite\obj\Debug\netcoreapp3.1\Razor\Pages\Recipes\Index.cshtml.g.cs
 D:\Documents\Projekty C#\RecipeWebsite\obj\Debug\netcoreapp3.1\RecipeWebsite.csproj.CoreCompileInputs.cache
 D:\Documents\Projekty C#\RecipeWebsite\obj\Debug\netcoreapp3.1\RecipeWebsite.MvcApplicationPartsAssemblyInfo.cache
+D:\Documents\Projekty C#\RecipeWebsite\obj\Debug\netcoreapp3.1\Razor\Pages\QuantityInRecipes\Create.cshtml.g.cs
+D:\Documents\Projekty C#\RecipeWebsite\obj\Debug\netcoreapp3.1\Razor\Pages\QuantityInRecipes\Delete.cshtml.g.cs
+D:\Documents\Projekty C#\RecipeWebsite\obj\Debug\netcoreapp3.1\Razor\Pages\QuantityInRecipes\Details.cshtml.g.cs
+D:\Documents\Projekty C#\RecipeWebsite\obj\Debug\netcoreapp3.1\Razor\Pages\QuantityInRecipes\Edit.cshtml.g.cs
+D:\Documents\Projekty C#\RecipeWebsite\obj\Debug\netcoreapp3.1\Razor\Pages\QuantityInRecipes\Index.cshtml.g.cs

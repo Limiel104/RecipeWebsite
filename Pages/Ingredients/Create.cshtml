@@ -1,6 +1,5 @@
 ﻿@page
 @model RecipeWebsite.Pages.Ingredients.CreateModel
-
 @{
     ViewData["Title"] = "Create";
 }
@@ -20,8 +19,11 @@
             </div>
             <div class="form-group">
                 <label asp-for="IngredientVM.TypeOfFood" class="control-label"></label>
-                <input asp-for="IngredientVM.TypeOfFood" class="form-control" />
-                <span asp-validation-for="IngredientVM.TypeOfFood" class="text-danger"></span>
+                <select asp-for="IngredientVM.TypeOfFood" class="form-control"
+                        asp-items="Html.GetEnumSelectList<RecipeWebsite.Models.TypeOfFood>()">
+                    <option value="">-- Wybierz Typ --</option>
+                </select>
+                <span asp-validation-for="IngredientVM.TypeOfFood" class="text-danger" />
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
