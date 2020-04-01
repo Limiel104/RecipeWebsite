@@ -5,10 +5,10 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<h1>Szczegóły</h1>
 
 <div>
-    <h4>Recipe</h4>
+    @*<h4>Recipe</h4>*@
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
@@ -38,26 +38,33 @@
                     <th>Nazwa</th>
                     <th>Typ</th>
                     <th>Ilość</th>
+                    <th></th>
                 </tr>
                 @foreach (var item in Model.Recipe.QuantityInRecipes)
                 {
-                    <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Ingredient.Name)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Ingredient.TypeOfFood)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Quantity)
-                        </td>
-                    </tr>
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ingredient.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Ingredient.TypeOfFood)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+                <td>
+                <td>
+                    <a asp-page="../QuantityInRecipes/Edit" asp-route-id="@item.QuantityInRecipeID">Edytuj ilość</a> |
+                    <a asp-page="../QuantityInRecipes/Delete" asp-route-id="@item.QuantityInRecipeID">Usuń</a>
+                </td>
+            </tr>
                 }
             </table>
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-page="./Edit" asp-route-id="@Model.Recipe.RecipeID">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <a asp-page="./Edit" asp-route-id="@Model.Recipe.RecipeID">Edytuj</a> |
+    <a asp-page="./Index">Powrót</a> |
+    <a asp-page="../QuantityInRecipes/Create">Dodaj składnik do przepisu</a>
 </div>

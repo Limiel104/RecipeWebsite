@@ -49,7 +49,7 @@ namespace RecipeWebsite.Pages.QuantityInRecipes
             _context.QuantityInRecipes.Add(QuantityInRecipe);
             await _context.SaveChangesAsync();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Recipes/Index");
         }
     }
 }

@@ -23,7 +23,7 @@ namespace RecipeWebsite.Pages.QuantityInRecipes
         [BindProperty]
         public QuantityInRecipe QuantityInRecipe { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public async Task<IActionResult> OnGetAsync(int? id/*, string returnUrl = null/*/)
         {
             if (id == null)
             {
@@ -79,7 +79,7 @@ namespace RecipeWebsite.Pages.QuantityInRecipes
                 }
             }
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("../Recipes/Index");
         }
 
         private bool QuantityInRecipeExists(int id)
