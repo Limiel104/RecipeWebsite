@@ -19,11 +19,55 @@ namespace RecipeWebsite.Pages.Recipes
             _context = context;
         }
 
-        public IList<Recipe> Recipe { get;set; }
+        public string NameSort { get; set; }
+        public string DateSort { get; set; }
+        public string ServingSort { get; set; }
+        public string CurrentFilter { get; set; }
+        public string CurrentSort { get; set; }
 
-        public async Task OnGetAsync()
+        public IList<Recipe> Recipes { get;set; }
+
+        public async Task OnGetAsync(string sortOrder, string searchString)
         {
-            Recipe = await _context.Recipes.ToListAsync();
+            //Recipe = await _context.Recipes.ToListAsync();
+
+            NameSort = String.IsNullOrEmpty(sortOrder) ? "name_desc" : "";
+            DateSort = sortOrder == "Date" ? "date_desc" : "Date";
+            ServingSort = sortOrder == "Serving" ? "serving_desc" : "Serving";
+
+            CurrentFilter = searchString;
+
+            IQueryable<Recipe> recipesIQ = from r in _context.Recipes
+                                           select r;
+
+            if (!String.IsNullOrEmpty(searchString))
+            {
+                recipesIQ = recipesIQ.Where(r => r.Name.Contains(searchString));
+            }
+
+            switch (sortOrder)
+            {
+                case "name_desc":
+                    recipesIQ = recipesIQ.OrderByDescending(r => r.Name);
+                    break;
+                case "Date":
+                    recipesIQ = recipesIQ.OrderBy(r => r.LastTimeServed);
+                    break;
+                case "date_desc":
+                    recipesIQ = recipesIQ.OrderByDescending(r => r.LastTimeServed);
+                    break;
+                case "Serving":
+                    recipesIQ = recipesIQ.OrderBy(r => r.NumberOfServings);
+                    break;
+                case "serving_desc":
+                    recipesIQ = recipesIQ.OrderByDescending(r => r.NumberOfServings);
+                    break;
+                default:
+                    recipesIQ = recipesIQ.OrderBy(r => r.Name);
+                    break;
+            }
+
+            Recipes = await recipesIQ.AsNoTracking().ToListAsync();
         }
     }
 }

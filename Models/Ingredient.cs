@@ -8,7 +8,7 @@ namespace RecipeWebsite.Models
 {
     public enum TypeOfFood
     {
-        zboża,nabiał,orzechy,pieczywo,przyprawy,ryby,drób,wieprzowina,oleje,warzywa,owoce,makarony,
+        drób, makarony, nabiał, oleje, orzechy, owoce, pieczywo, przyprawy, ryby, warzywa, wieprzowina, zboża,
     }
 
     public class Ingredient

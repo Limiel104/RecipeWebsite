@@ -11,23 +11,41 @@
     <a asp-page="Create">Dodaj nowy przepis</a> |
     <a asp-page="../QuantityInRecipes/Create">Dodaj składnik do przepisu</a>
 </p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Wyszukaj przepis:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Szukaj" class="btn btn-primary" /> |
+            <a asp-page="./Index">Pełna lista</a>
+        </p>
+    </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].Name)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
+                    @Html.DisplayNameFor(model => model.Recipes[0].Name)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].NumberOfServings)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.ServingSort">
+                    @Html.DisplayNameFor(model => model.Recipes[0].NumberOfServings)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Recipe[0].LastTimeServed)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DateSort">
+                    @Html.DisplayNameFor(model => model.Recipes[0].LastTimeServed)
+                </a>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Recipe) {
+@foreach (var item in Model.Recipes) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)

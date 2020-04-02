@@ -10,33 +10,65 @@
 <p>
     <a asp-page="Create">Dodaj nowy składnik</a>
 </p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Wyszukaj składnik:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Szukaj" class="btn btn-primary" /> |
+            <a asp-page="./Index">Pełna lista</a>
+        </p>
+    </div>
+</form>
+
+@*<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+            Wyszukaj po typie:
+            <input type="text" name="SearchString" value="@Model.CurrentFilter" />
+            <input type="submit" value="Szukaj" class="btn btn-primary" /> |
+            <a asp-page="./Index">Powrót</a>
+            <select asp-items="Html.GetEnumSelectList<RecipeWebsite.Models.TypeOfFood>()">
+                <option value="">-- Wybierz Typ --</option>
+            </select>
+            <input type="submit" value="Szukaj" name="Submit" />
+        </p>
+    </div>
+</form>*@
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Ingredient[0].Name)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.NameSort">
+                    @Html.DisplayNameFor(model => model.Ingredients[0].Name)
+                </a>
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ingredient[0].TypeOfFood)
+                <a asp-page="./Index" asp-route-sortOrder="@Model.TypeSort">
+                    @Html.DisplayNameFor(model => model.Ingredients[0].TypeOfFood)
+                </a>
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Ingredient) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TypeOfFood)
-            </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edytuj</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Szczegóły</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Usuń</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model.Ingredients) 
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.TypeOfFood)
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edytuj</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Szczegóły</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Usuń</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
