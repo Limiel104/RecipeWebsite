@@ -175,3 +175,8 @@ D:\Documents\Projekty C#\RecipeWebsite\obj\Debug\netcoreapp3.1\Razor\Pages\Quant
 D:\Documents\Projekty C#\RecipeWebsite\obj\Debug\netcoreapp3.1\Razor\Pages\QuantityInRecipes\Details.cshtml.g.cs
 D:\Documents\Projekty C#\RecipeWebsite\obj\Debug\netcoreapp3.1\Razor\Pages\QuantityInRecipes\Edit.cshtml.g.cs
 D:\Documents\Projekty C#\RecipeWebsite\obj\Debug\netcoreapp3.1\Razor\Pages\QuantityInRecipes\Index.cshtml.g.cs
+D:\Documents\Projekty C#\RecipeWebsite\obj\Debug\netcoreapp3.1\Razor\Pages\MealTypes\Create.cshtml.g.cs
+D:\Documents\Projekty C#\RecipeWebsite\obj\Debug\netcoreapp3.1\Razor\Pages\MealTypes\Delete.cshtml.g.cs
+D:\Documents\Projekty C#\RecipeWebsite\obj\Debug\netcoreapp3.1\Razor\Pages\MealTypes\Details.cshtml.g.cs
+D:\Documents\Projekty C#\RecipeWebsite\obj\Debug\netcoreapp3.1\Razor\Pages\MealTypes\Edit.cshtml.g.cs
+D:\Documents\Projekty C#\RecipeWebsite\obj\Debug\netcoreapp3.1\Razor\Pages\MealTypes\Index.cshtml.g.cs

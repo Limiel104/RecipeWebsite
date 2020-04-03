@@ -11,7 +11,7 @@ using RecipeWebsite.Models;
 
 namespace RecipeWebsite.Pages.Recipes
 {
-    public class EditModel : PageModel
+    public class EditModel : RecipeMealTypesPageModel
     {
         private readonly RecipeWebsite.Data.CookbookContext _context;
 
@@ -30,18 +30,25 @@ namespace RecipeWebsite.Pages.Recipes
                 return NotFound();
             }
 
-            Recipe = await _context.Recipes.FindAsync(id);
+            //Recipe = await _context.Recipes.FindAsync(id);
+            Recipe = await _context.Recipes
+                .Include(r => r.RecipeAssignments).ThenInclude(r => r.MealType)
+                .AsNoTracking()
+                .FirstOrDefaultAsync(m => m.RecipeID == id);
 
             if (Recipe == null)
             {
                 return NotFound();
             }
+            PopulateAssignedMealTypeData(_context,Recipe);
             return Page();
         }
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync(int id)
+
+        //public async Task<IActionResult> OnPostAsync(int id)
+        public async Task<IActionResult> OnPostAsync(int? id, string[] selectedMealTypes)
         {
             /*if (!ModelState.IsValid)
             {
@@ -68,7 +75,8 @@ namespace RecipeWebsite.Pages.Recipes
 
             return RedirectToPage("./Index");*/
 
-            var recipeToUpdate = await _context.Recipes.FindAsync(id);
+            /*bylo tylko to
+             * var recipeToUpdate = await _context.Recipes.FindAsync(id);
 
             if (recipeToUpdate == null)
             {
@@ -84,12 +92,40 @@ namespace RecipeWebsite.Pages.Recipes
                 return RedirectToPage("./Index");
             }
 
+            return Page();*/
+
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var recipeToUpdate = await _context.Recipes
+                .Include(r => r.RecipeAssignments)
+                    .ThenInclude(r => r.MealType)
+                .FirstOrDefaultAsync(s => s.RecipeID == id);
+
+            if (recipeToUpdate == null)
+            {
+                return NotFound();
+            }
+
+            if (await TryUpdateModelAsync<Recipe>(
+                recipeToUpdate,
+                "Recipe",
+                r => r.Name, r => r.NumberOfServings, r => r.LastTimeServed))
+            {
+                UpdateRecipeMealTypes(_context,selectedMealTypes,recipeToUpdate);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+            UpdateRecipeMealTypes(_context,selectedMealTypes,recipeToUpdate);
+            PopulateAssignedMealTypeData(_context,recipeToUpdate);
             return Page();
         }
 
-        private bool RecipeExists(int id)
+        /*private bool RecipeExists(int id)
         {
             return _context.Recipes.Any(e => e.RecipeID == id);
-        }
+        }*/
     }
 }

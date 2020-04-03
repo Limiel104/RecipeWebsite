@@ -29,9 +29,35 @@
                 <span asp-validation-for="RecipeVM.LastTimeServed" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Dodaj" class="btn btn-primary" />
-            </div>
-        </form>
+                <div class="table">
+                    <table>
+                        <tr>
+                            @{
+                                int cnt = 0;
+
+                                foreach (var mealType in Model.AssignedMealTypeDataList)
+                                {
+                                    if (cnt++ % 3 == 0)
+                                    {
+                                    @:</tr><tr>
+                                    }
+                                    @:<td>
+                                        <input type="checkbox"
+                                               name="selectedMealTypes"
+                                               value="@mealType.MealTypeID"
+                                               @(Html.Raw(mealType.Assigned ? "checked=\"checked\"" : "")) />
+                                        @mealType.MealTypeID @:  @mealType.Name
+                                    @:</td>
+                                }
+                            @:</tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <input type="submit" value="Dodaj" class="btn btn-primary" />
+                </div>
+            </form>
     </div>
 </div>
 

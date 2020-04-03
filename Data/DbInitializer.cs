@@ -41,6 +41,31 @@ namespace RecipeWebsite.Data
             }
             context.SaveChanges();
 
+            var mealtypes = new MealType[]
+            {
+                new MealType{Name="Śniadania"},
+                new MealType{Name="Obiady"},
+                new MealType{Name="Kolacje"},
+                new MealType{Name="Dania wegetariańskie"},
+                new MealType{Name="Dania wegańskie"},
+                new MealType{Name="Dania mięsne"},
+                new MealType{Name="Dania mączne"},
+                new MealType{Name="Ryby"},
+                new MealType{Name="Makarony"},
+                new MealType{Name="Zupy"},
+                new MealType{Name="Sałatki"},
+                new MealType{Name="Desery"},
+                new MealType{Name="Ciasta"},
+                new MealType{Name="Pieczywo"},
+                new MealType{Name="Przetwory"},
+                new MealType{Name="Sosy"},
+            };
+            foreach (MealType m in mealtypes)
+            {
+                context.MealTypes.Add(m);
+            }
+            context.SaveChanges();
+
             var recipes = new Recipe[]
             {
                 new Recipe{Name="Przepis1",NumberOfServings=1,LastTimeServed=DateTime.Parse("2020-03-12")},
@@ -53,6 +78,38 @@ namespace RecipeWebsite.Data
                 context.Recipes.Add(r);
             }
             context.SaveChanges();
+
+            var recipeAssignments = new RecipeAssignment[]
+            {
+                new RecipeAssignment{RecipeID = recipes.Single(r => r.Name == "Przepis1" ).RecipeID,
+                                     MealTypeID = mealtypes.Single(m => m.Name == "Dania wegetariańskie").ID},
+                new RecipeAssignment{RecipeID = recipes.Single(r => r.Name == "Przepis2" ).RecipeID,
+                                     MealTypeID = mealtypes.Single(m => m.Name == "Dania mięsne").ID},
+                new RecipeAssignment{RecipeID = recipes.Single(r => r.Name == "Przepis3" ).RecipeID,
+                                     MealTypeID = mealtypes.Single(m => m.Name == "Dania mączne").ID},
+                new RecipeAssignment{RecipeID = recipes.Single(r => r.Name == "Przepis4" ).RecipeID,
+                                     MealTypeID = mealtypes.Single(m => m.Name == "Dania wegańskie").ID},
+                new RecipeAssignment{RecipeID = recipes.Single(r => r.Name == "Przepis1" ).RecipeID,
+                                     MealTypeID = mealtypes.Single(m => m.Name == "Śniadania").ID},
+                new RecipeAssignment{RecipeID = recipes.Single(r => r.Name == "Przepis2" ).RecipeID,
+                                     MealTypeID = mealtypes.Single(m => m.Name == "Obiady").ID},
+                new RecipeAssignment{RecipeID = recipes.Single(r => r.Name == "Przepis3" ).RecipeID,
+                                     MealTypeID = mealtypes.Single(m => m.Name == "Kolacje").ID},
+                new RecipeAssignment{RecipeID = recipes.Single(r => r.Name == "Przepis4" ).RecipeID,
+                                     MealTypeID = mealtypes.Single(m => m.Name == "Kolacje").ID},
+                new RecipeAssignment{RecipeID = recipes.Single(r => r.Name == "Przepis1" ).RecipeID,
+                                     MealTypeID = mealtypes.Single(m => m.Name == "Obiady").ID},
+                new RecipeAssignment{RecipeID = recipes.Single(r => r.Name == "Przepis2" ).RecipeID,
+                                     MealTypeID = mealtypes.Single(m => m.Name == "Sałatki").ID},
+                new RecipeAssignment{RecipeID = recipes.Single(r => r.Name == "Przepis3" ).RecipeID,
+                                     MealTypeID = mealtypes.Single(m => m.Name == "Desery").ID},
+                new RecipeAssignment{RecipeID = recipes.Single(r => r.Name == "Przepis4" ).RecipeID,
+                                     MealTypeID = mealtypes.Single(m => m.Name == "Sosy").ID}
+            };
+            foreach (RecipeAssignment ra in recipeAssignments)
+            {
+                context.RecipeAssignments.Add(ra);
+            }
 
             var quantityInRecipes = new QuantityInRecipe[]
             {

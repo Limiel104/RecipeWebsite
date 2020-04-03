@@ -10,7 +10,7 @@ using RecipeWebsite.Models;
 
 namespace RecipeWebsite.Pages.Recipes
 {
-    public class CreateModel : PageModel
+    public class CreateModel : RecipeMealTypesPageModel
     {
         private readonly RecipeWebsite.Data.CookbookContext _context;
 
@@ -21,6 +21,10 @@ namespace RecipeWebsite.Pages.Recipes
 
         public IActionResult OnGet()
         {
+            //return Page();
+            var recipe = new Recipe();
+            recipe.RecipeAssignments = new List<RecipeAssignment>();
+            PopulateAssignedMealTypeData(_context,recipe);
             return Page();
         }
 
@@ -29,7 +33,7 @@ namespace RecipeWebsite.Pages.Recipes
 
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        /*public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
             {
@@ -40,6 +44,36 @@ namespace RecipeWebsite.Pages.Recipes
             entry.CurrentValues.SetValues(RecipeVM);
             await _context.SaveChangesAsync();
             return RedirectToPage("./Index");
+        }*/
+
+        public async Task<IActionResult> OnPostAsync(string[] selectedMealTypes)
+        {
+            var newRecipe = new Recipe();
+            if (selectedMealTypes != null)
+            {
+                newRecipe.RecipeAssignments = new List<RecipeAssignment>();
+                foreach (var mealType in selectedMealTypes)
+                {
+                    var mealTypeToAdd = new RecipeAssignment
+                    {
+                        MealTypeID = int.Parse(mealType)
+                    };
+                    newRecipe.RecipeAssignments.Add(mealTypeToAdd);
+                }
+            }
+
+            if (await TryUpdateModelAsync<Recipe>(
+                newRecipe,
+                "Recipe",
+                r => r.Name, r => r.NumberOfServings, r => r.LastTimeServed))
+            {
+                _context.Recipes.Add(newRecipe);
+                await _context.SaveChangesAsync();
+                return RedirectToPage("./Index");
+            }
+            PopulateAssignedMealTypeData(_context,newRecipe);
+            return Page();
         }
+
     }
 }

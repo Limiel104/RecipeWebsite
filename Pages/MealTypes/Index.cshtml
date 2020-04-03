@@ -1,0 +1,106 @@
+﻿@page "{id:int?}"
+@model RecipeWebsite.Pages.MealTypes.IndexModel
+
+@{
+    ViewData["Title"] = "MealTypes";
+}
+
+<h1>Kategorie Dań</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Typ Dania</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.MealTypeData.MealTypes)
+        {
+            string selectedRow = "";
+            if (item.ID == Model.MealTypeID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    <a asp-page="./Index" asp-route-id="@item.ID">Select</a> |
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+@if (Model.MealTypeData.Recipes != null)
+{
+    <h3>Przepisy w wybranej kategori</h3>
+    <table class="table">
+        <tr>
+            <th></th>
+            <th>Nazwa</th>
+            <th>Ilość porcji</th>
+            <th>Data ostatniego użycia</th>
+        </tr>
+
+        @foreach (var item in Model.MealTypeData.Recipes)
+        {
+            string selectedRow = "";
+            if (item.RecipeID == Model.RecipeID)
+            {
+                selectedRow = "table-success";
+            }
+            <tr class="@selectedRow">
+                <td>
+                    <a asp-page="./Index" asp-route-recipeID="@item.RecipeID">Select</a>
+                </td>
+                <td>
+                    @item.Name
+                </td>
+                <td>
+                    @item.NumberOfServings
+                </td>
+                <td>
+                    @item.LastTimeServed.ToShortDateString()
+                </td>
+            </tr>
+        }
+
+    </table>
+}
+
+@if (Model.MealTypeData.QuantityInRecipes != null)
+{
+    <h3>
+        Składniki w wybranym przepisie
+    </h3>
+    <table class="table">
+        <tr>
+            <th>Nazwa</th>
+            <th>Typ</th>
+            <th>Ilość</th>
+        </tr>
+        @foreach (var item in Model.MealTypeData.QuantityInRecipes)
+        {
+            <tr>
+                <td>
+                    @item.Ingredient.Name
+                </td>
+                <td>
+                    @item.Ingredient.TypeOfFood
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Quantity)
+                </td>
+            </tr>
+        }
+    </table>
+}

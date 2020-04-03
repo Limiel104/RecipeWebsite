@@ -23,5 +23,6 @@ namespace RecipeWebsite.Models
         public DateTime LastTimeServed { get; set; }
 
         public ICollection<QuantityInRecipe> QuantityInRecipes { get; set; }
+        public ICollection<RecipeAssignment> RecipeAssignments { get; set; }
     }
 }
